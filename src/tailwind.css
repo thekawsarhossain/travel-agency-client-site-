@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* group utilities */
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+}
+
+/* for making own tailwind class in our pc */
+@layer utilities {
+  .custom {
+    font-size: 20px;
+  }
+}
