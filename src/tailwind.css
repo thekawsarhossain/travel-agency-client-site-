@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  /* group utilities */
+  /* button  */
+  .btn {
+    @apply px-6 py-2 border-2 text-white border-primary hover:bg-primary duration-300 focus:ring-2;
+  }
+  /* navigation area */
   .nav-link {
     @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
   }
@@ -13,11 +17,15 @@
   .profile-link {
     @apply block px-4 py-2 text-sm text-gray-700;
   }
+  /* footer area */
+  .link {
+    @apply block text-center font-medium text-gray-300;
+  }
 }
 
 @layer base {
   h1 {
-    @apply text-4xl;
+    @apply text-3xl sm:text-5xl;
   }
   h2 {
     @apply text-3xl;
@@ -35,7 +43,11 @@
 
 /* for making own tailwind class in our pc */
 @layer utilities {
-  .custom {
-    font-size: 20px;
+  .bannerImg {
+    background-image: url("./Images/banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
