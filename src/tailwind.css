@@ -4,11 +4,32 @@
 
 @layer components {
   /* group utilities */
+  .nav-link {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+  }
+  .nav-link-res {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium;
+  }
+  .profile-link {
+    @apply block px-4 py-2 text-sm text-gray-700;
+  }
 }
 
 @layer base {
   h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
     @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-lg;
   }
 }
 
