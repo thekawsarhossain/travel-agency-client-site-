@@ -7,6 +7,12 @@
   .btn {
     @apply px-6 py-2 border-2 text-white border-primary hover:bg-primary duration-300 focus:ring-2;
   }
+  .btn-small {
+    @apply px-4 py-1 border-2 text-gray-900 border-primary hover:bg-primary duration-300 focus:ring-2;
+  }
+  .active-btn {
+    @apply px-4 py-1 border-2 text-white bg-primary duration-300;
+  }
   /* navigation area */
   .nav-link {
     @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
@@ -50,4 +56,24 @@
     background-size: cover;
     background-attachment: fixed;
   }
+}
+
+/* custom css for title  */
+.title:after {
+  content: "";
+  width: 3%;
+  height: 1px;
+  background-color: #2e79ea;
+  display: inline-block;
+  transform: translateY(-6px);
+  margin: 0 10px;
+}
+.title:before {
+  content: "";
+  width: 3%;
+  height: 1px;
+  background-color: #2e79ea;
+  display: inline-block;
+  transform: translateY(-8px);
+  margin: 0 10px;
 }

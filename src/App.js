@@ -1,15 +1,19 @@
 import React from "react";
-import Banner from "./Components/Home/Banner";
-import Footer from "./Components/Shared/Footer";
-import Navigation from "./Components/Shared/Navigation";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import BlogDetails from "./Components/Home/BlogDetails";
 import "./tailwind.css";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Banner />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
