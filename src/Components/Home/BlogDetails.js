@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchBlogDetails } from "../../Redux/Slices/blogSlice";
-import Footer from "../Shared/Footer";
 import animation from "../../Images/animation.gif";
-import Navigation from "../Shared/Navigation";
 import Rating from "react-rating";
 
 const BlogDetails = () => {
@@ -47,7 +45,6 @@ const BlogDetails = () => {
 
   return (
     <div>
-      <Navigation />
       {/* <h2 className="title text-center pt-4">Blog Details</h2> */}
       <div className="container mx-auto py-8 px-4 block lg:flex justify-between">
         <div className="lg:w-3/5 space-y-2">
@@ -125,7 +122,6 @@ const BlogDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

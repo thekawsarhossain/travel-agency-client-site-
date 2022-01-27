@@ -2,8 +2,11 @@ import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import logo from "../../Images/logo.webp";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
   return (
     <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
       {({ open }) => (
@@ -36,9 +39,21 @@ const Navigation = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    <button className="nav-link">Home</button>
-                    <button className="nav-link">Blogs</button>
-                    <button className="nav-link">Contact</button>
+                    <button className="nav-link" onClick={() => navigate("/")}>
+                      Home
+                    </button>
+                    <button
+                      className="nav-link"
+                      onClick={() => navigate("/blogs")}
+                    >
+                      Blogs
+                    </button>
+                    <button
+                      className="nav-link"
+                      onClick={() => navigate("/contact")}
+                    >
+                      Contact
+                    </button>
                   </div>
                 </div>
               </div>
@@ -83,9 +98,21 @@ const Navigation = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <button className="nav-link-res">Home</button>
-              <button className="nav-link-res">Blogs</button>
-              <button className="nav-link-res">Contact</button>
+              <button className="nav-link-res" onClick={() => navigate("/")}>
+                Home
+              </button>
+              <button
+                className="nav-link-res"
+                onClick={() => navigate("/blogs")}
+              >
+                Blogs
+              </button>
+              <button
+                className="nav-link-res"
+                onClick={() => navigate("/contact")}
+              >
+                Contact
+              </button>
             </div>
           </Disclosure.Panel>
         </>

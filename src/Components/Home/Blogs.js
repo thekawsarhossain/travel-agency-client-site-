@@ -96,20 +96,24 @@ const Blogs = () => {
             </div>
           ))}
         </div>
-        {/* pagination here  */}
-        <div className="mx-auto">
-          {pageCount &&
-            [...Array(pageCount)?.keys()]?.map((number) => (
-              <button
-                className={
-                  number === currentPage ? "active-btn" : "btn-small mx-1"
-                }
-                key={number}
-                onClick={() => setCurrentPage(number)}
-              >
-                {number}
-              </button>
-            ))}
+        {/* pagination and button here  */}
+        <div className="text-center mx-auto grid grid-cols-2 place-items-center">
+          {/* pagination here  */}
+          <div className="mx-auto">
+            {pageCount &&
+              [...Array(pageCount)?.keys()]?.map((number) => (
+                <button
+                  className={
+                    number === currentPage ? "active-btn" : "btn-small mx-1"
+                  }
+                  key={number}
+                  onClick={() => setCurrentPage(number)}
+                >
+                  {number}
+                </button>
+              ))}
+          </div>
+          <button className="btn-small">Post your Experience</button>
         </div>
       </div>
     </div>
