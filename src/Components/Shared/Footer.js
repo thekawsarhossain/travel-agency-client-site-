@@ -8,8 +8,8 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-gray-800 mt-6 p-4">
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-4 gap-6 py-16">
+    <div className="bg-gray-800 mt-6 p-6">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 py-16">
         {/* about agency */}
         <div className="space-y-4">
           <img src={logo} alt="logo" />
