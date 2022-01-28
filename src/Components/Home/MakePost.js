@@ -39,7 +39,7 @@ const MakePost = () => {
       imageData.append("image", image);
       setLoading(true);
       const res = await fetch(
-        "https://api.imgbb.com/1/upload?key=c74ba5f75128b6d53c7ecf94345de52c",
+        `https://api.imgbb.com/1/upload?key=${process.env.IMAGE_BB_KEY}`,
         {
           method: "POST",
           body: imageData,

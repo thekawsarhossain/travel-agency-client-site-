@@ -130,6 +130,14 @@ const Navigation = () => {
                                 Pending posts
                               </button>
                             </Menu.Item>
+                            <Menu.Item>
+                              <button
+                                className="profile-link"
+                                onClick={() => navigate("/all-posts")}
+                              >
+                                All posts
+                              </button>
+                            </Menu.Item>
                           </>
                         )}
                         <Menu.Item>

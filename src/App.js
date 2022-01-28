@@ -4,7 +4,6 @@ import Home from "./Components/Home/Home";
 import BlogDetails from "./Components/Home/BlogDetails";
 import "./tailwind.css";
 import Blogs from "./Components/Home/Blogs";
-import Contact from "./Components/Home/Contact";
 import Navigation from "./Components/Shared/Navigation";
 import Footer from "./Components/Shared/Footer";
 import Login from "./Components/Authentication/Login";
@@ -14,8 +13,8 @@ import AuthProvider from "./Context/AuthProvider";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import MakeAdmin from "./Components/Admin/MakeAdmin";
 import AdminRoute from "./Components/AdminRoute/Adminroute";
-import AllPosts from "./Components/Admin/PendingPosts";
 import PendingPosts from "./Components/Admin/PendingPosts";
+import AllPosts from "./Components/Admin/AllPosts";
 
 function App() {
   return (
@@ -58,6 +57,14 @@ function App() {
               element={
                 <AdminRoute>
                   <PendingPosts />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/all-posts"
+              element={
+                <AdminRoute>
+                  <AllPosts />
                 </AdminRoute>
               }
             />
