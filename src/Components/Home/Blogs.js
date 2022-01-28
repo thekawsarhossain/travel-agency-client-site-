@@ -69,7 +69,7 @@ const Blogs = () => {
                   <img
                     src={blog.userImage}
                     alt="user"
-                    className="w-12 sm:absolute top-0 right-0 rounded-full hidden lg:block m-1"
+                    className="w-28 sm:absolute top-0 right-0 rounded-full hidden lg:block m-1"
                   />
                   <h6>
                     {" "}

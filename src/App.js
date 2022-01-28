@@ -14,7 +14,8 @@ import AuthProvider from "./Context/AuthProvider";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import MakeAdmin from "./Components/Admin/MakeAdmin";
 import AdminRoute from "./Components/AdminRoute/Adminroute";
-import AllPosts from "./Components/Admin/AllPosts";
+import AllPosts from "./Components/Admin/PendingPosts";
+import PendingPosts from "./Components/Admin/PendingPosts";
 
 function App() {
   return (
@@ -56,7 +57,7 @@ function App() {
               path="/pending-posts"
               element={
                 <AdminRoute>
-                  <AllPosts />
+                  <PendingPosts />
                 </AdminRoute>
               }
             />

@@ -81,7 +81,11 @@ const Navigation = () => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src={user?.photoURL}
+                          src={
+                            user?.photoURL
+                              ? user?.photoURL
+                              : "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+                          }
                           alt=""
                         />
                       </Menu.Button>

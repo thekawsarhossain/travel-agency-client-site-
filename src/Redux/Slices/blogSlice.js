@@ -3,16 +3,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // thunk to get data using api here
 export const fetchBlogs = createAsyncThunk("blog/fetchBlogs", async (info) => {
   const response = await fetch(
-    `http://localhost:5000/blogs?page=${info?.currentPage}&&length=${info?.length}`
+    `https://intense-harbor-66213.herokuapp.com/blogs?page=${info?.currentPage}&&length=${info?.length}`
   ).then((res) => res.json());
   return response;
 });
 
 // getting users blog post data
 export const userPosts = createAsyncThunk("posts/userPosts", async () => {
-  const response = await fetch("http://localhost:5000/user-posts").then((res) =>
-    res.json()
-  );
+  const response = await fetch(
+    "https://intense-harbor-66213.herokuapp.com/user-posts"
+  ).then((res) => res.json());
   return response;
 });
 

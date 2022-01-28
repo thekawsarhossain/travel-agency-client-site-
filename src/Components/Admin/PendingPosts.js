@@ -6,7 +6,7 @@ import { userPosts } from "../../Redux/Slices/blogSlice";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const AllPosts = () => {
+const PendingPosts = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const AllPosts = () => {
 
   // approve handler button here
   const handleApprove = (blog) => {
-    fetch("http://localhost:5000/blogs", {
+    fetch("https://intense-harbor-66213.herokuapp.com/blogs", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(blog),
@@ -27,14 +27,17 @@ const AllPosts = () => {
       .then((result) => {
         if (result.insertedId) {
           toast("post approved");
-          fetch(`http://localhost:5000/blog/${blog?._id}`, {
-            method: "DELETE",
-            headers: { "content-type": "application/json" },
-          })
+          fetch(
+            `https://intense-harbor-66213.herokuapp.com/blog/${blog?._id}`,
+            {
+              method: "DELETE",
+              headers: { "content-type": "application/json" },
+            }
+          )
             .then((res) => res.json())
             .then((result) => {
               if (result.deletedCount) {
-                navigate("/");
+                navigate("/blogs");
               }
             });
         }
@@ -43,7 +46,7 @@ const AllPosts = () => {
 
   // handle delete here
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/blog/${id}`, {
+    fetch(`https://intense-harbor-66213.herokuapp.com/blog/${id}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     })
@@ -119,4 +122,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default PendingPosts;

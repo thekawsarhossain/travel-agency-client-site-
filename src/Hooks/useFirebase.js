@@ -21,6 +21,7 @@ const useFirebase = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [admin, setAdmin] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   // auth and providers here
   const auth = getAuth();
@@ -95,7 +96,7 @@ const useFirebase = () => {
   // save user
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("http://localhost:5000/users", {
+    fetch("https://intense-harbor-66213.herokuapp.com/users", {
       method: method,
       headers: { "content-type": "application/json" },
       body: JSON.stringify(user),
@@ -104,7 +105,7 @@ const useFirebase = () => {
 
   // user admin data loading
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${user.email}`)
+    fetch(`https://intense-harbor-66213.herokuapp.com/user/${user.email}`)
       .then((response) => response.json())
       .then((data) => setAdmin(data.admin));
   }, [user.email]);
@@ -112,7 +113,7 @@ const useFirebase = () => {
   // email varification
   const emailVarify = () => {
     sendEmailVerification(auth.currentUser).then(() => {
-      console.log("senddddd");
+      setAlert(true);
     });
   };
 
@@ -136,6 +137,7 @@ const useFirebase = () => {
     loading,
     logoutUser,
     signInWithGoogle,
+    alert,
   };
 };
 

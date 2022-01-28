@@ -54,11 +54,14 @@ const MakePost = () => {
         data.locationImage = result.data.display_url;
         data.rating = rating;
         data.userImage = user?.photoURL;
-        const beckendRes = await fetch("http://localhost:5000/user-post", {
-          method: "POST",
-          headers: { "content-type": " application/json" },
-          body: JSON.stringify(data),
-        });
+        const beckendRes = await fetch(
+          "https://intense-harbor-66213.herokuapp.com/user-post",
+          {
+            method: "POST",
+            headers: { "content-type": " application/json" },
+            body: JSON.stringify(data),
+          }
+        );
         const beckendResult = await beckendRes.json();
         console.log(beckendResult);
       } else {
@@ -103,7 +106,7 @@ const MakePost = () => {
           onChange={(e) => setImage(e.target.files[0])}
         />
         <Rating
-          className="text-golden text-left p-4"
+          className="text-golden text-left text-4xl"
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
           onChange={(rate) => setrating(rate)}
