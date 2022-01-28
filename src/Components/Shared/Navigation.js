@@ -63,6 +63,12 @@ const Navigation = () => {
                     >
                       Blogs
                     </button>
+                    <button
+                      className="nav-link"
+                      onClick={() => navigate("/make-post")}
+                    >
+                      Make a Post
+                    </button>
                   </div>
                 </div>
               </div>
@@ -105,13 +111,19 @@ const Navigation = () => {
                         {admin && (
                           <>
                             <Menu.Item>
-                              <button onClick={() => navigate("/make-admin")}>
-                                Make another Admin
+                              <button
+                                className="profile-link"
+                                onClick={() => navigate("/make-admin")}
+                              >
+                                Make Admin
                               </button>
                             </Menu.Item>
                             <Menu.Item>
-                              <button onClick={() => navigate("/all-posts")}>
-                                All Posts
+                              <button
+                                className="profile-link"
+                                onClick={() => navigate("/pending-posts")}
+                              >
+                                Pending posts
                               </button>
                             </Menu.Item>
                           </>
@@ -146,6 +158,12 @@ const Navigation = () => {
                 onClick={() => navigate("/blogs")}
               >
                 Blogs
+              </button>
+              <button
+                className="nav-link-res"
+                onClick={() => navigate("/make-post")}
+              >
+                Make a Post
               </button>
             </div>
           </Disclosure.Panel>

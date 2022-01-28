@@ -5,6 +5,7 @@ import animation from "../../Images/animation.gif";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchBlogs } from "../../Redux/Slices/blogSlice";
+import { addToDetails } from "../../Redux/Slices/blogSlice";
 
 const Blogs = () => {
   // getting blogs data here
@@ -39,18 +40,24 @@ const Blogs = () => {
     );
   }
 
+  // handle blog to show details here
+  const handleBlog = (blog) => {
+    dispatch(addToDetails(blog));
+    navigate(`/blog/${blog?._id}`);
+  };
+
   return (
     <div className="px-6">
       <div className="container mx-auto py-12">
         {/* blogs title here  */}
-        <h2 className="title text-center">What customers say</h2>
+        <h2 className="title mb-4">What customers say</h2>
         {/* contents start from here  */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-8">
+        <div className="space-y-4">
           {/* map items here  */}
           {blogs?.blogs?.map((blog) => (
             <div
               key={blog?._id}
-              className="border rounded-md border-gray-800 block lg:flex justify-start items-center relative lg:h-1/2"
+              className="border rounded-md border-gray-800 block lg:flex justify-start items-center relative"
             >
               <img
                 src={blog?.locationImage}
@@ -90,7 +97,7 @@ const Blogs = () => {
                     />
                     <button
                       className="btn-small mt-2"
-                      onClick={() => navigate(`/blog/${blog?._id}`)}
+                      onClick={() => handleBlog(blog)}
                     >
                       Read more
                     </button>
@@ -99,27 +106,30 @@ const Blogs = () => {
               </div>
             </div>
           ))}
-        </div>
-        {/* pagination and button here  */}
-        <div className="text-center mx-auto grid grid-cols-2 place-items-center">
-          {/* pagination here  */}
-          <div className="mx-auto">
-            {pageCount &&
-              [...Array(pageCount)?.keys()]?.map((number) => (
-                <button
-                  className={
-                    number === currentPage ? "active-btn" : "btn-small mx-1"
-                  }
-                  key={number}
-                  onClick={() => setCurrentPage(number)}
-                >
-                  {number}
-                </button>
-              ))}
+          {/* pagination and button here  */}
+          <div className="text-center flex">
+            {/* pagination here  */}
+            <div className="mx-auto">
+              {pageCount &&
+                [...Array(pageCount)?.keys()]?.map((number) => (
+                  <button
+                    className={
+                      number === currentPage ? "active-btn" : "btn-small mx-1"
+                    }
+                    key={number}
+                    onClick={() => setCurrentPage(number)}
+                  >
+                    {number}
+                  </button>
+                ))}
+            </div>
+            <button
+              className="btn-small"
+              onClick={() => navigate("/make-post")}
+            >
+              Post your Experience
+            </button>
           </div>
-          <button className="btn-small" onClick={() => navigate("/make-post")}>
-            Post your Experience
-          </button>
         </div>
       </div>
     </div>

@@ -8,17 +8,6 @@ export const fetchBlogs = createAsyncThunk("blog/fetchBlogs", async (info) => {
   return response;
 });
 
-// getting single blog data
-export const fetchBlogDetails = createAsyncThunk(
-  "blogDetails/fetchBlogDetails",
-  async (id) => {
-    const response = await fetch(`http://localhost:5000/blog/${id}`).then(
-      (res) => res.json()
-    );
-    return response;
-  }
-);
-
 // getting users blog post data
 export const userPosts = createAsyncThunk("posts/userPosts", async () => {
   const response = await fetch("http://localhost:5000/user-posts").then((res) =>
@@ -31,24 +20,21 @@ const blogSlice = createSlice({
   name: "blogs",
   initialState: {
     allBlogs: [],
-    blogDetails: [],
+    blogDetails: null,
     userPosts: [],
     status: "idle",
   },
-  reducers: {},
+  reducers: {
+    addToDetails: (state, action) => {
+      state.blogDetails = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBlogs.fulfilled, (state, action) => {
       state.allBlogs = action.payload;
       state.status = "success";
     });
     builder.addCase(fetchBlogs.pending, (state, action) => {
-      state.status = "pending";
-    });
-    builder.addCase(fetchBlogDetails.fulfilled, (state, action) => {
-      state.blogDetails = action.payload;
-      state.status = "success";
-    });
-    builder.addCase(fetchBlogDetails.pending, (state, action) => {
       state.status = "pending";
     });
     builder.addCase(userPosts.fulfilled, (state, action) => {
@@ -60,5 +46,5 @@ const blogSlice = createSlice({
     });
   },
 });
-
+export const { addToDetails } = blogSlice.actions;
 export default blogSlice.reducer;

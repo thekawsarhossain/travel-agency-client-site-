@@ -1,7 +1,10 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   const { user } = useAuth();
 
   if (user?.emailVerified === false) {
@@ -16,7 +19,9 @@ const Banner = () => {
           Do Travel Always, <br />
           and share your experience with us!{" "}
         </h1>
-        <button className="btn">Share Now</button>
+        <button className="btn" onClick={() => navigate("/make-post")}>
+          Share Now
+        </button>
       </div>
     </div>
   );

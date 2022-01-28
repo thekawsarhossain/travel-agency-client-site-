@@ -53,7 +53,7 @@ function App() {
               }
             />
             <Route
-              path="/all-posts"
+              path="/pending-posts"
               element={
                 <AdminRoute>
                   <AllPosts />

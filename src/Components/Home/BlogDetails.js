@@ -1,38 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchBlogDetails } from "../../Redux/Slices/blogSlice";
+import { addToDetails } from "../../Redux/Slices/blogSlice";
 import animation from "../../Images/animation.gif";
 import Rating from "react-rating";
 
 const BlogDetails = () => {
-  // react router dom hook here
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  // getting data here using redux
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchBlogDetails(id));
-  }, [dispatch, id]);
 
   const blog = useSelector((state) => state?.blogs?.blogDetails);
   const allBlogs = useSelector((state) => state?.blogs?.allBlogs?.blogs);
   const loading = useSelector((state) => state?.blogs?.status);
-
-  // data destructuring here
-  const {
-    date,
-    time,
-    expense,
-    location,
-    locationImage,
-    rating,
-    userImage,
-    userName,
-    userThoughts,
-  } = blog;
 
   // loading animation here
   if (loading === "pending") {
@@ -50,32 +28,33 @@ const BlogDetails = () => {
         <div className="lg:w-3/5 space-y-2">
           {/* user info */}
           <div className="flex justify-start items-end">
-            <img src={userImage} alt="user" className="w-20" />
-            <h6 className="font-medium">Added By: {userName}</h6>
+            <img src={blog?.userImage} alt="user" className="w-20" />
+            <h6 className="font-medium">Added By: {blog?.userName}</h6>
           </div>
           {/* location image  */}
-          <img src={locationImage} alt="location" className="rounded" />
+          <img src={blog?.locationImage} alt="location" className="rounded" />
           {/* content here  */}
           <div className="flex justify-between items-center">
-            <p className="font-medium">Date: {date}</p>
-            <p className="font-medium">Added Time: {time}</p>
+            <p className="font-medium">Date: {blog?.date}</p>
+            <p className="font-medium">Added Time: {blog?.time}</p>
           </div>
           <div className="flex justify-between">
-            <h3 className=" ">Location: {location}</h3>
+            <h3 className=" ">Location: {blog?.location}</h3>
             <span>
               Raiting:{" "}
               <Rating
                 className="text-golden"
-                initialRating={rating}
+                initialRating={blog?.rating}
                 emptySymbol="far fa-star"
                 fullSymbol="fas fa-star"
                 readonly
               />
             </span>
           </div>
-          <h3>Total Expense: {expense} BDT</h3>
+          <h3>Total Expense: {blog?.expense} BDT</h3>
           <h6>
-            <span className="font-medium">My Experience:</span> {userThoughts}
+            <span className="font-medium">My Experience:</span>{" "}
+            {blog?.userThoughts}
           </h6>
         </div>
         {/* sidebar here  */}
@@ -106,7 +85,7 @@ const BlogDetails = () => {
                         />
                         <button
                           className="btn-small mt-1 block"
-                          onClick={() => navigate(`/blog/${blog?._id}`)}
+                          onClick={() => dispatch(addToDetails(blog))}
                         >
                           Read more
                         </button>

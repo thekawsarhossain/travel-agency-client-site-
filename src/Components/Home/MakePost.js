@@ -48,11 +48,11 @@ const MakePost = () => {
       const result = await res.json();
       setLoading(false);
       if (result.success === true) {
-        data.locationImage = result.data.display_url;
         data.date = date;
-        data.rating = rating;
         data.time = currentTime;
         data.userName = user?.displayName;
+        data.locationImage = result.data.display_url;
+        data.rating = rating;
         data.userImage = user?.photoURL;
         const beckendRes = await fetch("http://localhost:5000/user-post", {
           method: "POST",
