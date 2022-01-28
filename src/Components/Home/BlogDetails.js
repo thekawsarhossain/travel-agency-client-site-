@@ -83,11 +83,8 @@ const BlogDetails = () => {
           <h3 className="title">Blog's you might like also</h3>
           <div>
             {allBlogs?.slice(0, 6)?.map((blog) => (
-              <div className="my-4">
-                <div
-                  key={blog?._id}
-                  className="border rounded-md border-gray-800 block lg:flex justify-between items-center"
-                >
+              <div className="my-4" key={blog?._id}>
+                <div className="border rounded-md border-gray-800 block lg:flex justify-between items-center">
                   <img src={blog?.locationImage} className="lg:w-2/4" alt="" />
                   <div className="p-2">
                     <div>

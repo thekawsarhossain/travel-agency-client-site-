@@ -24,7 +24,6 @@ const Footer = () => {
           <h4 className="text-white font-medium">Navigation</h4>
           <button className="link">Home</button>
           <button className="link">Blogs</button>
-          <button className="link">Contact</button>
         </div>
         {/* contact info */}
         <div className=" space-y-4">
