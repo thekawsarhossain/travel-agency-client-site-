@@ -27,6 +27,15 @@
   .link {
     @apply block text-center font-medium text-gray-300;
   }
+  .input {
+    @apply border border-gray-800 block w-11/12 mx-auto px-4 py-2 focus:outline-0 focus:border-primary;
+  }
+  .input-btn {
+    @apply border border-primary block w-11/12 mx-auto px-4 py-2 bg-primary font-medium text-white focus:ring-2;
+  }
+  .bordered {
+    @apply mx-auto text-center border-4 border-gray-400 hover:border-4 duration-300 hover:border-primary my-16 p-4 py-8;
+  }
 }
 
 @layer base {
@@ -74,6 +83,25 @@
   height: 1px;
   background-color: #2e79ea;
   display: inline-block;
-  transform: translateY(-8px);
+  transform: translateY(-7px);
+  margin: 0 10px;
+}
+
+.title-2:after {
+  content: "";
+  width: 15%;
+  height: 1px;
+  background-color: #2e79ea;
+  display: inline-block;
+  transform: translateY(-6px);
+  margin: 0 10px;
+}
+.title-2:before {
+  content: "";
+  width: 15%;
+  height: 1px;
+  background-color: #2e79ea;
+  display: inline-block;
+  transform: translateY(-7px);
   margin: 0 10px;
 }

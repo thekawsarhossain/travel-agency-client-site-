@@ -10,7 +10,7 @@ const Blogs = () => {
   // getting blogs data here
   const blogs = useSelector((state) => state?.blogs?.allBlogs);
   const loading = useSelector((state) => state?.blogs?.status);
-  console.log(blogs);
+
   // react router dom hook
   const navigate = useNavigate();
 
@@ -113,7 +113,9 @@ const Blogs = () => {
                 </button>
               ))}
           </div>
-          <button className="btn-small">Post your Experience</button>
+          <button className="btn-small" onClick={() => navigate("/make-post")}>
+            Post your Experience
+          </button>
         </div>
       </div>
     </div>
