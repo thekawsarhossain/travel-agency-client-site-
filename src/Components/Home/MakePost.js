@@ -11,6 +11,7 @@ const MakePost = () => {
   // image state
   const [image, setImage] = useState(null);
   const [rating, setrating] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   //  time & date
   let time = new Date();
@@ -28,34 +29,43 @@ const MakePost = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
     if (!image) {
       toast("Add a image to post");
       return;
     } else {
-      const formData = new FormData();
-      formData.append("date", date);
-      formData.append("time", currentTime);
-      formData.append("userName", user?.displayName);
-      formData.append("userImage", user?.photoURL);
-      formData.append("rating", rating);
-      formData.append("location", data?.location);
-      formData.append("expense", data?.expense);
-      formData.append("userThoughts", data?.userThoughts);
-      formData.append("image", image);
-      //   fetching here
-      fetch("http://localhost:5000/user-post", {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          if (result?.insertedId) {
-            toast("Your post sucessfully post! wait for admin approve ");
-          }
-        })
-        .catch((err) => toast(err));
+      const imageData = new FormData();
+      imageData.append("image", image);
+      setLoading(true);
+      const res = await fetch(
+        "https://api.imgbb.com/1/upload?key=c74ba5f75128b6d53c7ecf94345de52c",
+        {
+          method: "POST",
+          body: imageData,
+        }
+      );
+      const result = await res.json();
+      setLoading(false);
+      if (result.success === true) {
+        data.locationImage = result.data.display_url;
+        data.date = date;
+        data.rating = rating;
+        data.time = currentTime;
+        data.userName = user?.displayName;
+        data.userImage = user?.photoURL;
+        const beckendRes = await fetch("http://localhost:5000/user-post", {
+          method: "POST",
+          headers: { "content-type": " application/json" },
+          body: JSON.stringify(data),
+        });
+        const beckendResult = await beckendRes.json();
+        console.log(beckendResult);
+      } else {
+        toast("There is an error !");
+      }
     }
+
     // tostify here
     toast(errors);
     reset();
@@ -93,14 +103,16 @@ const MakePost = () => {
           onChange={(e) => setImage(e.target.files[0])}
         />
         <Rating
-          className="text-golden text-left"
+          className="text-golden text-left p-4"
           emptySymbol="far fa-star"
           fullSymbol="fas fa-star"
           onChange={(rate) => setrating(rate)}
         />
 
-        <input className="input-btn" type="submit" value="Login" />
+        <input className="input-btn" type="submit" value="Post" />
+        {loading && <p>uploading</p>}
       </form>
+
       <ToastContainer />
     </div>
   );

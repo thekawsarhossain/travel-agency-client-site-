@@ -4,8 +4,11 @@ import Rating from "react-rating";
 import { useDispatch } from "react-redux";
 import { userPosts } from "../../Redux/Slices/blogSlice";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userPosts());
@@ -29,7 +32,11 @@ const AllPosts = () => {
             headers: { "content-type": "application/json" },
           })
             .then((res) => res.json())
-            .then((result) => console.log(result));
+            .then((result) => {
+              if (result.deletedCount) {
+                navigate("/");
+              }
+            });
         }
       });
   };

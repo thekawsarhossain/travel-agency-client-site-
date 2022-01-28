@@ -50,15 +50,19 @@ const Blogs = () => {
           {blogs?.blogs?.map((blog) => (
             <div
               key={blog?._id}
-              className="border rounded-md border-gray-800 block lg:flex justify-start items-center relative"
+              className="border rounded-md border-gray-800 block lg:flex justify-start items-center relative lg:h-1/2"
             >
-              <img src={blog?.locationImage} className="lg:w-5/12" alt="" />
+              <img
+                src={blog?.locationImage}
+                className="lg:w-5/12 h-full"
+                alt=""
+              />
               <div className="p-2">
                 <div>
                   <img
                     src={blog.userImage}
                     alt="user"
-                    className="w-12 sm:absolute top-0 right-0 rounded-full hidden lg:block"
+                    className="w-12 sm:absolute top-0 right-0 rounded-full hidden lg:block m-1"
                   />
                   <h6>
                     {" "}
