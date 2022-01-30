@@ -39,7 +39,7 @@ const MakePost = () => {
       imageData.append("image", image);
       setLoading(true);
       const res = await fetch(
-        `https://api.imgbb.com/1/upload?key=${process.env.IMAGE_BB_KEY}`,
+        `https://api.imgbb.com/1/upload?key=c74ba5f75128b6d53c7ecf94345de52c`,
         {
           method: "POST",
           body: imageData,
@@ -63,7 +63,9 @@ const MakePost = () => {
           }
         );
         const beckendResult = await beckendRes.json();
-        console.log(beckendResult);
+        if (beckendResult.insertedId) {
+          toast("Posted successfully !");
+        }
       } else {
         toast("There is an error !");
       }
@@ -112,8 +114,14 @@ const MakePost = () => {
           onChange={(rate) => setrating(rate)}
         />
 
-        <input className="input-btn" type="submit" value="Post" />
-        {loading && <p>uploading</p>}
+        {loading ? (
+          <div>
+            <input className="input-btn" type="submit" value="Post" disabled />
+            <p className="title">uploading</p>
+          </div>
+        ) : (
+          <input className="input-btn" type="submit" value="Post" />
+        )}
       </form>
 
       <ToastContainer />

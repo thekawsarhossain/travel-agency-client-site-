@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { userPosts } from "../../Redux/Slices/blogSlice";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { deleteUserPost } from "../../Redux/Slices/blogSlice";
 
 const PendingPosts = () => {
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ const PendingPosts = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result.insertedId) {
-          toast("post approved");
           fetch(
             `https://intense-harbor-66213.herokuapp.com/blog/${blog?._id}`,
             {
@@ -37,7 +37,8 @@ const PendingPosts = () => {
             .then((res) => res.json())
             .then((result) => {
               if (result.deletedCount) {
-                navigate("/blogs");
+                dispatch(deleteUserPost(blog?._id));
+                toast("post approved");
               }
             });
         }
@@ -51,17 +52,22 @@ const PendingPosts = () => {
       headers: { "content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        if (result.deletedCount) {
+          dispatch(deleteUserPost(id));
+          toast("deleted");
+        }
+      });
   };
 
   return (
     <div className="w-11/12 mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-1 gap-8 py-8">
+        {/* title here  */}
+        <h2 className="title">Pending Posts !</h2>
         {/* map items here  */}
         {!blogs.length ? (
-          <h2 className="text-center text-primary">
-            There is no post to apporove !
-          </h2>
+          <h2 className="title">There is no post to apporove !</h2>
         ) : (
           blogs?.map((blog) => (
             <div

@@ -57,6 +57,7 @@ const useFirebase = () => {
 
   // getting the current user here
   useEffect(() => {
+    setLoading(true);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -105,9 +106,12 @@ const useFirebase = () => {
 
   // user admin data loading
   useEffect(() => {
+    setLoading(true);
     fetch(`https://intense-harbor-66213.herokuapp.com/user/${user.email}`)
       .then((response) => response.json())
-      .then((data) => setAdmin(data.admin));
+      .then((data) => setAdmin(data.admin))
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   }, [user.email]);
 
   // email varification

@@ -47,25 +47,25 @@ function App() {
             <Route
               path="/make-admin"
               element={
-                <AdminRoute>
+                <PrivateRoute>
                   <MakeAdmin />
-                </AdminRoute>
+                </PrivateRoute>
               }
             />
             <Route
               path="/pending-posts"
               element={
-                <AdminRoute>
+                <PrivateRoute>
                   <PendingPosts />
-                </AdminRoute>
+                </PrivateRoute>
               }
             />
             <Route
               path="/all-posts"
               element={
-                <AdminRoute>
+                <PrivateRoute>
                   <AllPosts />
-                </AdminRoute>
+                </PrivateRoute>
               }
             />
           </Routes>

@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Rating from "react-rating";
 import { useDispatch } from "react-redux";
-import { userPosts } from "../../Redux/Slices/blogSlice";
+import { fetchAllBlogs } from "../../Redux/Slices/blogSlice";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
   const navigate = useNavigate();
 
+  // calling thunk to get all the blogs
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(userPosts());
+    dispatch(fetchAllBlogs());
   }, [dispatch]);
 
   const blogs = useSelector((state) => state?.blogs?.allBlogs);
@@ -30,12 +31,12 @@ const AllPosts = () => {
     <div className="w-11/12 mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-1 gap-8 py-8">
         {/* map items here  */}
-        {!blogs?.blogs?.length ? (
+        {!blogs?.length ? (
           <h2 className="text-center text-primary">
             There is no post to Show !
           </h2>
         ) : (
-          blogs?.blogs?.map((blog) => (
+          blogs?.map((blog) => (
             <div
               key={blog?._id}
               className="border rounded-md border-gray-800 block lg:flex justify-start items-center "

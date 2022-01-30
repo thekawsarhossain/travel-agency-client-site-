@@ -1,12 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // thunk to get data using api here
+
+// getting all blogs using also pagination here
 export const fetchBlogs = createAsyncThunk("blog/fetchBlogs", async (info) => {
   const response = await fetch(
     `https://intense-harbor-66213.herokuapp.com/blogs?page=${info?.currentPage}&&length=${info?.length}`
   ).then((res) => res.json());
   return response;
 });
+
+// getting all the blogs here
+export const fetchAllBlogs = createAsyncThunk(
+  "blogs/fetchAllBlogs",
+  async () => {
+    const response = await fetch(
+      "https://intense-harbor-66213.herokuapp.com/all-blogs"
+    ).then((res) => res.json());
+    return response;
+  }
+);
 
 // getting users blog post data
 export const userPosts = createAsyncThunk("posts/userPosts", async () => {
@@ -19,6 +32,7 @@ export const userPosts = createAsyncThunk("posts/userPosts", async () => {
 const blogSlice = createSlice({
   name: "blogs",
   initialState: {
+    blogs: [],
     allBlogs: [],
     blogDetails: null,
     userPosts: [],
@@ -28,13 +42,25 @@ const blogSlice = createSlice({
     addToDetails: (state, action) => {
       state.blogDetails = action.payload;
     },
+    deleteUserPost: (state, action) => {
+      state.userPosts = state.userPosts.filter(
+        (post) => post._id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBlogs.fulfilled, (state, action) => {
-      state.allBlogs = action.payload;
+      state.blogs = action.payload;
       state.status = "success";
     });
     builder.addCase(fetchBlogs.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchAllBlogs.fulfilled, (state, action) => {
+      state.allBlogs = action.payload;
+      state.status = "success";
+    });
+    builder.addCase(fetchAllBlogs.pending, (state, action) => {
       state.status = "pending";
     });
     builder.addCase(userPosts.fulfilled, (state, action) => {
@@ -46,5 +72,5 @@ const blogSlice = createSlice({
     });
   },
 });
-export const { addToDetails } = blogSlice.actions;
+export const { addToDetails, deleteUserPost } = blogSlice.actions;
 export default blogSlice.reducer;

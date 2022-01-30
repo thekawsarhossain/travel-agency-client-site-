@@ -28,9 +28,9 @@ const Banner = () => {
           <button onClick={emailVarify} className="btn-small">
             varify Now
           </button>
-          {alert && toast("check email")}
         </div>
       )}
+      {alert && toast("check email")}
     </>
   );
 };

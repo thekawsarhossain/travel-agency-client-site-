@@ -9,7 +9,7 @@ import { addToDetails } from "../../Redux/Slices/blogSlice";
 
 const Blogs = () => {
   // getting blogs data here
-  const blogs = useSelector((state) => state?.blogs?.allBlogs);
+  const blogs = useSelector((state) => state?.blogs?.blogs);
   const loading = useSelector((state) => state?.blogs?.status);
 
   // react router dom hook
@@ -67,7 +67,11 @@ const Blogs = () => {
               <div className="p-2">
                 <div>
                   <img
-                    src={blog.userImage}
+                    src={
+                      blog?.userImage
+                        ? blog.userImage
+                        : "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+                    }
                     alt="user"
                     className="w-28 sm:absolute top-0 right-0 rounded-full hidden lg:block m-1"
                   />

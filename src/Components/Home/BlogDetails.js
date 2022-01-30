@@ -9,7 +9,7 @@ const BlogDetails = () => {
   const dispatch = useDispatch();
 
   const blog = useSelector((state) => state?.blogs?.blogDetails);
-  const allBlogs = useSelector((state) => state?.blogs?.allBlogs?.blogs);
+  const blogs = useSelector((state) => state?.blogs?.blogs?.blogs);
   const loading = useSelector((state) => state?.blogs?.status);
 
   // loading animation here
@@ -28,7 +28,15 @@ const BlogDetails = () => {
         <div className="lg:w-3/5 space-y-2">
           {/* user info */}
           <div className="flex justify-start items-end">
-            <img src={blog?.userImage} alt="user" className="w-20" />
+            <img
+              src={
+                blog?.userImage
+                  ? blog.userImage
+                  : "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png"
+              }
+              alt="user"
+              className="w-12 rounded-full mx-3"
+            />
             <h6 className="font-medium">Added By: {blog?.userName}</h6>
           </div>
           {/* location image  */}
@@ -61,7 +69,7 @@ const BlogDetails = () => {
         <div className="mt-14 lg:w-1/3">
           <h3 className="title">Blog's you might like also</h3>
           <div>
-            {allBlogs?.slice(0, 6)?.map((blog) => (
+            {blogs?.slice(0, 6)?.map((blog) => (
               <div className="my-4" key={blog?._id}>
                 <div className="border rounded-md border-gray-800 block lg:flex justify-between items-center">
                   <img src={blog?.locationImage} className="lg:w-2/4" alt="" />
