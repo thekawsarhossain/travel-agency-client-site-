@@ -47,6 +47,9 @@ const blogSlice = createSlice({
         (post) => post._id !== action.payload
       );
     },
+    addComment: (state, action) => {
+      state.blogDetails.comments.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBlogs.fulfilled, (state, action) => {
@@ -72,5 +75,5 @@ const blogSlice = createSlice({
     });
   },
 });
-export const { addToDetails, deleteUserPost } = blogSlice.actions;
+export const { addToDetails, deleteUserPost, addComment } = blogSlice.actions;
 export default blogSlice.reducer;

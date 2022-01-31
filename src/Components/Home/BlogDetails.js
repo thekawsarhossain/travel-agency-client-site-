@@ -1,16 +1,37 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { addToDetails } from "../../Redux/Slices/blogSlice";
+import { addComment, addToDetails } from "../../Redux/Slices/blogSlice";
 import animation from "../../Images/animation.gif";
 import Rating from "react-rating";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import useAuth from "../../Hooks/useAuth";
+
+const comments = false;
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
+  const { user } = useAuth();
 
   const blog = useSelector((state) => state?.blogs?.blogDetails);
   const blogs = useSelector((state) => state?.blogs?.blogs?.blogs);
   const loading = useSelector((state) => state?.blogs?.status);
+
+  // react hook form data for comment
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    data.name = user.displayName;
+    data.email = user.email;
+    dispatch(addComment(data));
+    toast("hello");
+  };
 
   // loading animation here
   if (loading === "pending") {
@@ -23,6 +44,7 @@ const BlogDetails = () => {
 
   return (
     <div>
+      <ToastContainer />
       {/* <h2 className="title text-center pt-4">Blog Details</h2> */}
       <div className="container mx-auto py-8 px-4 block lg:flex justify-between">
         <div className="lg:w-3/5 space-y-2">
@@ -64,6 +86,31 @@ const BlogDetails = () => {
             <span className="font-medium">My Experience:</span>{" "}
             {blog?.userThoughts}
           </h6>
+          {/* comments  and add a comment section start here   */}
+          <hr />
+          <div>
+            {/* showing comments here  */}
+            <div>
+              <h4 className="title">
+                {comments ? "All comments" : "There is no comment"}
+              </h4>
+            </div>
+            {/* add a comment  */}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-10">
+              <textarea
+                placeholder="Write your comment here "
+                className="input w-1/2 mx-0"
+                type="text"
+                {...register("email", { required: true })}
+              />
+              <input
+                className="input-btn w-1/2 mx-0"
+                type="submit"
+                value="Post"
+              />
+            </form>
+            <div></div>
+          </div>
         </div>
         {/* sidebar here  */}
         <div className="mt-14 lg:w-1/3">
